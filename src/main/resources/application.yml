@@ -1,0 +1,28 @@
+server:
+  port: 8098
+
+spring:
+  application:
+    name: batch-v5
+  jackson:
+    default-property-inclusion: NON_NULL
+    serialization:
+      fail-on-empty-beans: false
+  #disabled job run at startupч
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: never
+  datasource:
+    url: jdbc:postgresql://localhost:5433/demo
+    username: ivanan_postgres
+    password: postgres_pwd
+    driver-class-name: org.postgresql.Driver
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: ivanan_mongo
+      password: mongo_pwd
+      auto-index-creation: false
