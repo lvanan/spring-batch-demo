@@ -21,10 +21,33 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ivanan_mongo
       MONGO_INITDB_ROOT_PASSWORD: mongo_pwd
+      MONGO_INITDB_DATABASE: demo
     ports:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ivanan_mongo
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mongo_pwd
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    depends_on:
+      - mongodb
+
+  mongo-client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mongo-client
+    depends_on:
+      - mongodb
+    entrypoint: ["tail", "-f", "/dev/null"]  # Keep the container running
 
 volumes:
   postgres_data:
