@@ -21,8 +21,9 @@ spring:
     driver-class-name: org.postgresql.Driver
   data:
     mongodb:
-      host: localhost
-      port: 27017
+      uri: mongodb://ivanan_mongo:mongo_pwd@localhost:27017/demo?authSource=admin
       username: ivanan_mongo
       password: mongo_pwd
       auto-index-creation: false
+      database: demo
+

@@ -17,7 +17,9 @@ import org.springframework.transaction.PlatformTransactionManager
 @Service
 class BatchJobRunnerService(
     private val jobLauncher: JobLauncher, private val jobRepository: JobRepository,
-    private val transactionManager: PlatformTransactionManager
+    private val transactionManager: PlatformTransactionManager,
+    private val mongoJobEntityReader: MongoJobEntityReader,
+    private val jobItemProcessor: JobItemProcessor
 ) {
 
     fun runSpringBatchJob(exportType: ExportType, role: String) {
@@ -27,8 +29,8 @@ class BatchJobRunnerService(
 
         val step: Step = StepBuilder("csv_export", jobRepository)
             .chunk<EmployeeMongoEntity, ProcessedItemEntity>(500, transactionManager)
-            .reader(MongoJobEntityReader())
-            .processor(JobItemProcessor())
+            .reader(mongoJobEntityReader)
+            .processor(jobItemProcessor)
             .writer(JobCsvWriter())
             .build()
 
