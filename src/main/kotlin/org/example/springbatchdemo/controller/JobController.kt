@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class JobController(private val batchJobRunnerService: BatchJobRunnerService) {
 
-
     @GetMapping("/export/csv")
     fun triggerCsvExport(): ResponseEntity<String> {
         batchJobRunnerService.runSpringBatchJob(ExportType.CSV, "Engineer")
