@@ -30,6 +30,7 @@ class JobCsvWriter : ItemWriter<ProcessedItemEntity>, StepExecutionListener {
         writer?.let {
             chunk.items.forEach { processedItemEntity ->
                 it.write(processedItemEntity!!.line)
+                it.write("\n")
             }
         }
     }

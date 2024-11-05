@@ -1,10 +1,11 @@
 package org.example.springbatchdemo.runner
 
+import mu.KotlinLogging
 import org.example.springbatchdemo.entity.EmployeeMongoEntity
 import org.example.springbatchdemo.entity.ProcessedItemEntity
-import org.example.springbatchdemo.processor.JobItemProcessor
+import org.example.springbatchdemo.processor.JobItemProcessorFactory
 import org.example.springbatchdemo.reader.MongoJobEntityReader
-import org.example.springbatchdemo.writer.JobCsvWriter
+import org.example.springbatchdemo.writer.JobWriterFactory
 import org.springframework.batch.core.JobParametersBuilder
 import org.springframework.batch.core.Step
 import org.springframework.batch.core.job.builder.JobBuilder
@@ -19,8 +20,9 @@ class BatchJobRunnerService(
     private val jobLauncher: JobLauncher, private val jobRepository: JobRepository,
     private val transactionManager: PlatformTransactionManager,
     private val mongoJobEntityReader: MongoJobEntityReader,
-    private val jobItemProcessor: JobItemProcessor
 ) {
+
+    private val logger = KotlinLogging.logger {}
 
     fun runSpringBatchJob(exportType: ExportType, role: String) {
         val jobParameters = JobParametersBuilder().addString("role", role)
@@ -30,19 +32,15 @@ class BatchJobRunnerService(
         val step: Step = StepBuilder("csv_export", jobRepository)
             .chunk<EmployeeMongoEntity, ProcessedItemEntity>(500, transactionManager)
             .reader(mongoJobEntityReader)
-            .processor(jobItemProcessor)
-            .writer(JobCsvWriter())
+            .processor(JobItemProcessorFactory.getJobItemProcessor(ExportType.CSV))
+            .writer(JobWriterFactory.getJobWriter(ExportType.CSV))
             .build()
 
         val job = JobBuilder("csv job", jobRepository).start(step).build()
         val jobExecution = jobLauncher.run(job, jobParameters)
-        println(
-            "Update display job submitted with id: {}, jobId: {}, instance.getJobName: {}," + " instance.getId: {}".format(
-                jobExecution.id,
-                jobExecution.jobId,
-                jobExecution.jobInstance.jobName,
-                jobExecution.jobInstance.id
-            )
-        )
+        logger.info {
+            "Export $exportType job submitted with id: ${jobExecution.id}, jobId: ${jobExecution.jobId}, " +
+                    "jobName: ${jobExecution.jobInstance.jobName}, instanceId: ${jobExecution.jobInstance.id}"
+        }
     }
 }

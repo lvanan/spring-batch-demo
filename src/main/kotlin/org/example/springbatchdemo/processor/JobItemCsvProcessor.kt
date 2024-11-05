@@ -8,15 +8,11 @@ import org.springframework.stereotype.Component
 
 @Component
 @StepScope
-class JobItemProcessor : ItemProcessor<EmployeeMongoEntity, ProcessedItemEntity> {
+class JobItemCsvProcessor : ItemProcessor<EmployeeMongoEntity, ProcessedItemEntity> {
     override fun process(mongoEntity: EmployeeMongoEntity): ProcessedItemEntity {
 
         val csvLine: String = mongoEntity.age.toString() + ", " + mongoEntity.name + ", " + mongoEntity.role
 
         return ProcessedItemEntity(null, csvLine)
-    }
-
-    companion object {
-        private const val LIST_OBJECT_DELIMITER = ";"
     }
 }
