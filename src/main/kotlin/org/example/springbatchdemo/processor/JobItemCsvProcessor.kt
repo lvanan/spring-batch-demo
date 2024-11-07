@@ -10,9 +10,20 @@ import org.springframework.stereotype.Component
 @StepScope
 class JobItemCsvProcessor : ItemProcessor<EmployeeMongoEntity, ProcessedItemEntity> {
     override fun process(mongoEntity: EmployeeMongoEntity): ProcessedItemEntity {
+        return ProcessedItemEntity(null, transformationWithComma(mongoEntity.age, mongoEntity.name, mongoEntity.role))
+    }
 
-        val csvLine: String = mongoEntity.age.toString() + ", " + mongoEntity.name + ", " + mongoEntity.role
+    private fun transformationWithComma(age: Int, name: String, role: String): String {
+        return "$age, $name, $role"
+    }
 
-        return ProcessedItemEntity(null, csvLine)
+    // TODO: add request parameters to choose transformations
+    private fun transformationWithRoleChange(age: Int, name: String, role: String): String {
+        // promote each engineer to the manager
+        if (role == "Engineer") {
+            return "$age, $name, Manager"
+        }
+
+        return "$age, $name, $role"
     }
 }

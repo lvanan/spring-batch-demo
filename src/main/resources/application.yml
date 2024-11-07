@@ -8,7 +8,6 @@ spring:
     default-property-inclusion: NON_NULL
     serialization:
       fail-on-empty-beans: false
-  #disabled job run at startupч
   batch:
     job:
       enabled: false
@@ -16,13 +15,13 @@ spring:
       initialize-schema: never
   datasource:
     url: jdbc:postgresql://localhost:5433/demo
-    username: ivanan_postgres
+    username: postgres_user
     password: postgres_pwd
     driver-class-name: org.postgresql.Driver
   data:
     mongodb:
-      uri: mongodb://ivanan_mongo:mongo_pwd@localhost:27017/demo?authSource=admin
-      username: ivanan_mongo
+      uri: mongodb://mongo_user:mongo_pwd@localhost:27017/demo?authSource=admin
+      username: mongo_user
       password: mongo_pwd
       auto-index-creation: false
       database: demo
