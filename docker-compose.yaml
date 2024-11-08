@@ -41,15 +41,6 @@ services:
     depends_on:
       - mongodb
 
-  mongo-client:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: mongo-client
-    depends_on:
-      - mongodb
-    entrypoint: ["tail", "-f", "/dev/null"]  # Keep the container running
-
 volumes:
   postgres_data:
   mongo_data:
