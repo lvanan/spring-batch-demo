@@ -19,10 +19,10 @@ class MongoJobEntityReader(
     private val LIST_ID_QUERY_TEMPLATE: String = "{ 'role': '%s' }"
 
     init {
+        setQuery(String.format(LIST_ID_QUERY_TEMPLATE, roleName))
         setCollection(COLLECTION_NAME_TO_READ)
         setBatchSize(DEFAULT_CHUNK_SIZE)
         setTemplate(mongoTemplate)
-        setQuery(String.format(LIST_ID_QUERY_TEMPLATE, roleName))
         setTargetType(EmployeeMongoEntity::class.java)
         setSort(HashMap())
     }
