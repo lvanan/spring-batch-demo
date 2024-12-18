@@ -4,12 +4,10 @@ import mu.KotlinLogging
 import org.springframework.batch.core.Job
 import org.springframework.batch.core.JobParametersBuilder
 import org.springframework.batch.core.launch.JobLauncher
-import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Service
 
 
 @Service
-@Profile("flexible")
 class BatchJobRunnerService(
     private val jobLauncher: JobLauncher, private val job: Job
 ) {

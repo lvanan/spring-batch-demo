@@ -13,7 +13,6 @@ import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.core.step.builder.StepBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Profile
 import org.springframework.core.task.TaskExecutor
 import org.springframework.scheduling.annotation.Async
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
@@ -22,7 +21,6 @@ import java.util.concurrent.ThreadPoolExecutor
 
 
 @Configuration
-@Profile("flexible")
 @EnableBatchProcessing
 class SpringBatchJobConfiguration(private val jobRepository: JobRepository, private val transactionManager: PlatformTransactionManager) {
 

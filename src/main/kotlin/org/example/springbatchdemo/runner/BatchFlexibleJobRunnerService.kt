@@ -12,12 +12,10 @@ import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.launch.JobLauncher
 import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.core.step.builder.StepBuilder
-import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Service
 import org.springframework.transaction.PlatformTransactionManager
 
 @Service
-@Profile("flexible")
 class BatchFlexibleJobRunnerService(
     private val jobLauncher: JobLauncher, private val jobRepository: JobRepository,
     private val transactionManager: PlatformTransactionManager,
