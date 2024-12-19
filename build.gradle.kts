@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
-    implementation("org.springframework.boot:spring-boot-starter-batch")
+    implementation("org.springframework.boot:spring-boot-starter-batch:3.4.0")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
