@@ -17,7 +17,7 @@ class JobItemCsvProcessor : ItemProcessor<EmployeeMongoEntity, ProcessedItemEnti
         return "$age, $name, $role"
     }
 
-    // TODO: add request parameters to choose transformations
+    // use this transformation of necessary
     private fun transformationWithRoleChange(age: Int, name: String, role: String): String {
         // promote each engineer to the manager
         if (role == "Engineer") {

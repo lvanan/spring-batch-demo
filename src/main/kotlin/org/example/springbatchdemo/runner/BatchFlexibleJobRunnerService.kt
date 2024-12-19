@@ -32,8 +32,8 @@ class BatchFlexibleJobRunnerService(
         val step: Step = StepBuilder("csv_export", jobRepository)
             .chunk<EmployeeMongoEntity, ProcessedItemEntity>(500, transactionManager)
             .reader(mongoJobEntityReader)
-            .processor(JobItemProcessorFactory.getJobItemProcessor(ExportType.CSV))
-            .writer(JobWriterFactory.getJobWriter(ExportType.CSV))
+            .processor(JobItemProcessorFactory.getJobItemProcessor(exportType))
+            .writer(JobWriterFactory.getJobWriter(exportType))
             .build()
 
         val job = JobBuilder("csv job", jobRepository).start(step).build()

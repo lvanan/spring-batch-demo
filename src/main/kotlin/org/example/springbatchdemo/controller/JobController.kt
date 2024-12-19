@@ -16,13 +16,14 @@ class JobController(
 
     @GetMapping("/export")
     fun triggerCsvExport(@RequestParam exportType: ExportType): ResponseEntity<String> {
-        batchFlexibleJobRunnerService.runSpringBatchJob(exportType, "Engineer")
+        batchJobRunnerService.runSpringBatchJob(exportType, "Engineer")
         return ResponseEntity.ok("export triggered");
     }
 
     @GetMapping("flexible/export")
     fun triggerCsvFlexibleExport(@RequestParam exportType: ExportType): ResponseEntity<String> {
-        batchJobRunnerService.runSpringBatchJob(exportType, "Engineer")
+        batchFlexibleJobRunnerService.runSpringBatchJob(exportType, "Engineer")
+
         return ResponseEntity.ok("export triggered");
     }
 }
