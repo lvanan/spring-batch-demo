@@ -1,5 +1,6 @@
 package org.example.springbatchdemo.controller
 
+import mu.KotlinLogging
 import org.example.springbatchdemo.runner.BatchFlexibleJobRunnerService
 import org.example.springbatchdemo.runner.BatchJobRunnerService
 import org.example.springbatchdemo.runner.ExportType
@@ -13,6 +14,14 @@ class JobController(
     private val batchFlexibleJobRunnerService: BatchFlexibleJobRunnerService,
     private val batchJobRunnerService: BatchJobRunnerService
 ) {
+
+    @GetMapping("/test")
+    fun test(@RequestParam exportType: ExportType): ResponseEntity<String> {
+        val logger = KotlinLogging.logger {}
+
+        logger.info("message from the app v3")
+        return ResponseEntity.ok("ok");
+    }
 
     @GetMapping("/export")
     fun triggerCsvExport(@RequestParam exportType: ExportType): ResponseEntity<String> {

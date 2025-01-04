@@ -19,6 +19,10 @@ repositories {
 }
 
 dependencies {
+    implementation("io.opentelemetry:opentelemetry-api:1.45.0")
+    implementation("io.opentelemetry:opentelemetry-sdk:1.45.0")
+    implementation("io.opentelemetry.javaagent:opentelemetry-javaagent:2.11.0")
+
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
     implementation("org.springframework.boot:spring-boot-starter-batch:3.4.0")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
