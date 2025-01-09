@@ -7,7 +7,14 @@ plugins {
 }
 
 application {
-    applicationDefaultJvmArgs = listOf("-javaagent:opentelemetry-javaagent.jar")
+    applicationDefaultJvmArgs = listOf(
+        "-javaagent:opentelemetry-javaagent.jar",
+        "-Dotel.traces.exporter=otlp",
+        "-Dotel.metrics.exporter=otlp",
+        "-Dotel.logs.exporter=otlp",
+        "-Dotel.exporter.otlp.endpoint=http://localhost:4318",
+        "-Dotel.service.name=my-service"
+    )
 }
 
 group = "org.example"
@@ -46,10 +53,4 @@ kotlin {
     compilerOptions {
         freeCompilerArgs.addAll("-Xjsr305=strict")
     }
-}
-
-tasks.withType<Test> {
-    environment(mapOf("-Dotel.exporter.otlp.endpoint" to "http://otel-collector:4317",
-        "-Dotel.service.name" to "spring-batch-demo"))
-    useJUnitPlatform()
 }

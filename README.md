@@ -28,11 +28,7 @@ To run export:
 - find export result in output.csv in "spring-batch-demo" folder
 
 To track metrics, traces and logs via openTelemetry:
-
-- run otel-collector:
-  docker run --name otel-collector \
-  -p 4317:4317 -p 4318:4318 -p 55681:55681 \
-  otel/opentelemetry-collector-contrib:latest
-- download java agent and add it to the spring-boot-demo folder:
-  curl -LJO https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v2.11.0/opentelemetry-javaagent.jar
-- ./gradlew bootRun to run the project
+- docker compose up
+- ./gradlew bootRun
+- http://localhost:3000/ with admin/admin login/password for grafana mvisualisation
+- http://localhost:9090/ for prometheus monitoring
