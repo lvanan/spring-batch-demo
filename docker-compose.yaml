@@ -23,9 +23,8 @@ services:
       - "8888:8888"   # Prometheus metrics exposed by the collector
       - "8889:8889"   # Prometheus exporter metrics
       - "13133:13133" # health_check extension
-      - "4317:4317"   # OpenTelemetry Protocol gRPC receiver
+      - "4318:4318"   # OpenTelemetry Protocol http receiver
       - "55679:55679" # zpages extension
-      - "4318:4318"
     networks:
       - monitoring
     healthcheck:

@@ -13,8 +13,6 @@ exporters:
     loglevel: debug
   prometheus:
     endpoint: "0.0.0.0:8889"
-  prometheusremotewrite:
-    endpoint: https://admin:admin@localhost:3000/api/v1/push
 
 extensions:
   # responsible for responding to health check calls on behalf of the collector.
