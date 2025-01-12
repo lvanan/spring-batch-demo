@@ -13,7 +13,7 @@ application {
         "-Dotel.metrics.exporter=otlp",
         "-Dotel.logs.exporter=otlp",
         "-Dotel.exporter.otlp.endpoint=http://localhost:4318",
-        "-Dotel.service.name=my-service"
+        "-Dotel.service.name=spring-batch-demo"
     )
 }
 
@@ -31,8 +31,6 @@ repositories {
 }
 
 dependencies {
-    implementation("io.opentelemetry:opentelemetry-api:1.45.0")
-    implementation("io.opentelemetry:opentelemetry-sdk:1.45.0")
     implementation("io.opentelemetry.javaagent:opentelemetry-javaagent:2.11.0")
 
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
